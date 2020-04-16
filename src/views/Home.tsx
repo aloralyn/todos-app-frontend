@@ -1,28 +1,46 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import TaskCard from "../components/TaskCard";
 
-const HeaderContainer = styled.div`
+const Container = styled.div`
   display: flex;
-  height: 3rem;
+`;
+
+const HeaderOuterContainer = styled.div`
+  position: fixed;
+  width: 100%;
+`;
+
+const HeaderInnerContainer = styled.div`
+  display: flex;
+  height: 4rem;
   margin: 20px;
   align-items: center;
   background-color: #8c5393;
 `;
 
-const Header = styled.p`
+const HeaderText = styled.p`
   font-size: 18px;
   color: #f1e2ff;
   padding-left: 20px;
 `;
 
 const TasksContainer = styled.div`
+  width: 100%;
   margin: 20px;
-  margin-top: 40px;
+  margin-top: 150px;
 `;
 
 const TaskCardContainer = styled.div`
   padding-bottom: 20px;
+`;
+
+const AddTaskLink = styled.p`
+  font-size: 18px;
+  color: #f1e2ff;
+  padding-left: 20px;
+  display: block;
 `;
 
 const data = [
@@ -32,19 +50,28 @@ const data = [
   { _id: "4", todo: "yah, Brah" },
 ];
 
+const Header: React.FunctionComponent = () => (
+  <HeaderOuterContainer>
+    <HeaderInnerContainer>
+      <HeaderText>no, B!tch</HeaderText>
+    </HeaderInnerContainer>
+  </HeaderOuterContainer>
+);
+
 const Home: React.FunctionComponent = () => (
-  <>
-    <HeaderContainer>
-      <Header>no, B!tch</Header>
-    </HeaderContainer>
+  <Container>
+    <Header />
     <TasksContainer>
+      <AddTaskLink>
+        <Link to="/add-task">+ Add Task</Link>
+      </AddTaskLink>
       {data.map((task) => (
         <TaskCardContainer>
           <TaskCard key={task._id} todo={task.todo} />
         </TaskCardContainer>
       ))}
     </TasksContainer>
-  </>
+  </Container>
 );
 
 export default Home;
