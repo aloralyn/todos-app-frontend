@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import TaskCard from "../components/TaskCard";
 
 const Container = styled.div`
   display: flex;
@@ -66,9 +65,7 @@ const Home: React.FunctionComponent = () => (
         <Link to="/add-task">+ Add Task</Link>
       </AddTaskLink>
       {data.map((task) => (
-        <TaskCardContainer>
-          <TaskCard key={task._id} todo={task.todo} />
-        </TaskCardContainer>
+        <TaskCardContainer></TaskCardContainer>
       ))}
     </TasksContainer>
   </Container>

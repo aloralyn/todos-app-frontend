@@ -1,0 +1,11 @@
+overwrite: true
+schema: "https://qwertypies-api.onrender.com/api/signup"
+documents: "./src/components/**/*.tsx"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      withHooks: true
