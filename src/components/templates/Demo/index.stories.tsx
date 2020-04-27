@@ -1,14 +1,14 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import styled from "styled-components";
-import Title from "./";
+import DemoPage from ".";
 
 const Container = styled.div`
-  margin: 20px;
+  margin-top: 40px;
 `;
 
-storiesOf("Atoms", module).add("Title", () => (
+storiesOf("Templates", module).add("Demo", () => (
   <Container>
-    <Title>Salute the Sun</Title>
+    <DemoPage />
   </Container>
 ));

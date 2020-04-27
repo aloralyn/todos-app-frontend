@@ -10,16 +10,11 @@ const Container = styled.div`
   text-align: center;
 `;
 
-storiesOf("Button", module)
+storiesOf("Atoms", module)
   .addDecorator(withKnobs)
-  .add("Square default", () => (
+  .add("Button - Square Default", () => (
     <Container>
-      <Button onClick={action("clicked")}>+</Button>
-    </Container>
-  ))
-  .add("Square cyan", () => (
-    <Container>
-      <Button color="cyan" onClick={action("clicked")}>
+      <Button onClick={action("clicked")} theme="square">
         +
       </Button>
     </Container>

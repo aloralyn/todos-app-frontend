@@ -9,7 +9,7 @@ export interface AddTaskButtonProps {
 const AddTaskButton: React.FunctionComponent<AddTaskButtonProps> = ({
   onClick,
 }) => (
-  <Button onClick={onClick}>
+  <Button onClick={onClick} theme="square">
     <MdPlaylistAdd color="white" size={22} />
   </Button>
 );

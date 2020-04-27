@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, HTMLProps } from "react";
 import styled from "styled-components";
 
 const StyledCard = styled.div`
@@ -8,18 +8,23 @@ width: 100%;
 padding-top: 10px;
 padding-bottom: 10px;
 color: #fff;
-font-size: 14px;
 background-color: #282c34;
 :hover {
   background-color: #404040;
 `;
 
-interface CardProps {
+interface CardProps extends HTMLProps<HTMLDivElement> {
   children?: ReactNode;
 }
 
-const TaskCard: React.FunctionComponent<CardProps> = ({ children }) => (
-  <StyledCard>{children}</StyledCard>
+const TaskCard: React.FunctionComponent<CardProps> = ({
+  children,
+  onMouseOver,
+  onMouseOut,
+}) => (
+  <StyledCard onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+    {children}
+  </StyledCard>
 );
 
 export default TaskCard;

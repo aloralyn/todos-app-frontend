@@ -3,12 +3,8 @@ import styled from "styled-components";
 import { FormContextValues } from "react-hook-form";
 
 const StyledInput = styled.input`
-  border: 5px solid;
-  border-image-source: linear-gradient(
-    to left,
-    rgba(148, 187, 233, 1) 0%,
-    rgba(238, 174, 202, 1) 100%
-  );
+  border: 4px solid;
+  border-image-source: linear-gradient(to left, #eeaeca 0%, #636fa4 100%);
   border-image-slice: 1;
   border-radius: 0.375rem;
   line-height: 1.5;

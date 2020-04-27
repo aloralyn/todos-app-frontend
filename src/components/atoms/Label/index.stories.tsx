@@ -8,7 +8,7 @@ const Container = styled.div`
   margin: 80px;
 `;
 
-storiesOf("Forms", module)
+storiesOf("Atoms", module)
   .addDecorator(withKnobs)
   .add("Label", () => (
     <Container>

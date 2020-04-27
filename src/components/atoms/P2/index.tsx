@@ -10,20 +10,20 @@ const NonselectableItem = styled.div`
   user-select: none;
 `;
 
-const StyledTitle = styled(NonselectableItem)`
-  font-size: 16px;
+const StyledP2 = styled(NonselectableItem)`
   color: #fff;
-  line-height: 22px;
-  letter-spacing: 0.015em;
-  font-weight: 500;
+  opacity: 0.6;
+  font-size: 14px;
+  -webkit-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
 `;
 
-interface TitleProps {
+interface P2Props {
   children?: ReactNode;
 }
 
-const Title: React.FunctionComponent<TitleProps> = ({ children }) => (
-  <StyledTitle unselectable="on">{children}</StyledTitle>
+const P2: React.FunctionComponent<P2Props> = ({ children }) => (
+  <StyledP2 unselectable="on">{children}</StyledP2>
 );
 
-export default Title;
+export default P2;

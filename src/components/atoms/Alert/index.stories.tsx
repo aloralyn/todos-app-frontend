@@ -1,14 +1,14 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import styled from "styled-components";
-import Title from "./";
+import Alert from "./";
 
 const Container = styled.div`
-  margin: 20px;
+  margin: 40px;
 `;
 
-storiesOf("Atoms", module).add("Title", () => (
+storiesOf("Atoms", module).add("Alert default", () => (
   <Container>
-    <Title>Salute the Sun</Title>
+    <Alert>Task successfully added!</Alert>
   </Container>
 ));

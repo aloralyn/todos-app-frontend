@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Task } from "./AddTaskForm";
-import TaskCard from "./TaskCard";
+import TaskCard, { Task } from "../../molecules/TaskCard";
 
 const Board = styled.div`
   width: 60%;
@@ -24,8 +23,8 @@ interface TasksBoardProps {
 const TasksBoard: React.FunctionComponent<TasksBoardProps> = ({ tasks }) => {
   return (
     <Board>
-      <Header>Gratitude List</Header>
-      {/* {tasks.length ? (
+      <Header>Todo List</Header>
+      {tasks.length ? (
         tasks.map(({ title, description }, idx) => (
           <TaskCard
             key={idx}
@@ -37,13 +36,7 @@ const TasksBoard: React.FunctionComponent<TasksBoardProps> = ({ tasks }) => {
         ))
       ) : (
         <Header>empty</Header>
-      )} */}
-      <TaskCard
-        task={{
-          title: "Salute the sun",
-          description: "and walk the Dog",
-        }}
-      />
+      )}
     </Board>
   );
 };

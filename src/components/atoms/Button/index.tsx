@@ -1,28 +1,44 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-type Theme = "default" | "square";
+type Theme = "default" | "square" | "rectangle";
 
 const StyledButton = styled.button<{ color?: string; theme: Theme }>`
   background-color: ${({ color }) => color ?? "#1ab953"};
   color: #fff;
   user-select: none;
-  width: 45px;
-  height: 35px;
+  ${({ theme }) =>
+    theme === "square" &&
+    `width: 45px;
+    height: 35px;
+    padding: 0 0.875rem;
+    `};
+  ${({ theme }) =>
+    theme === "rectangle" &&
+    `width: 105px;
+    height: 35px;
+    padding: 0.25rem;
+    `};
   border-radius: 0.7rem;
   border: none;
-  text-transform: uppercase;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.875rem;
   font-weight: 800;
   font-size: 0.78rem;
   transition: box-shadow 0.3s;
   will-change: box-shadow;
   :active {
-    width: 50px;
+    ${({ theme }) =>
+      theme === "square" &&
+      `width: 50px;
+      height: 40px;
+    `};
+    ${({ theme }) =>
+      theme === "rectangle" &&
+      `width: 115px;
     height: 40px;
+  `};
     font-weight: 900;
     font-size: 1rem;
   }

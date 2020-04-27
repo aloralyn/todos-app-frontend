@@ -5,6 +5,7 @@ import FormContainer from "../../atoms/FormContainer";
 import FormInput from "../../molecules/FormInput";
 import FormTextArea from "../../molecules/FormTextArea";
 import AddTaskButton from "../../molecules/AddTaskButton";
+import { Task } from "../../molecules/TaskCard";
 
 const ButtonContainer = styled.div`
   margin-top: 20px;
@@ -12,15 +13,8 @@ const ButtonContainer = styled.div`
   text-align: center;
 `;
 
-export type Task = {
-  title: string;
-  description: string;
-  dateCreated?: Date;
-};
-
 interface AddTaskFormProps {
-  tasks?: Task[];
-  addTask?: any;
+  addTask: (task: Task) => void;
 }
 
 const AddTaskForm: React.FunctionComponent<AddTaskFormProps> = ({
@@ -50,7 +44,7 @@ const AddTaskForm: React.FunctionComponent<AddTaskFormProps> = ({
         />
         <FormTextArea
           id="description"
-          name="Description"
+          name="description"
           placeholder="Description"
           maxLength={150}
           register={register}

@@ -10,9 +10,9 @@ const Container = styled.div`
   text-align: center;
 `;
 
-storiesOf("Button", module)
+storiesOf("Molecules", module)
   .addDecorator(withKnobs)
-  .add("Add Task", () => (
+  .add("Button w/ Add Task Icon", () => (
     <Container>
       <AddTaskButton onClick={action("clicked add task")} />
     </Container>
