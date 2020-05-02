@@ -3,7 +3,11 @@ import styled from "styled-components";
 import TaskCard, { Task } from "../../molecules/TaskCard";
 
 const Board = styled.div`
-  width: 60%;
+  width: 90%;
+`;
+
+const TaskContainer = styled.div`
+  border-top: 1px solid #eeaeca;
 `;
 
 const Header = styled.div`
@@ -13,7 +17,9 @@ const Header = styled.div`
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.015em;
-  margin: 25px 0 5px 35px;
+  margin-top: 25px;
+  margin-left: 5px;
+  margin-bottom: 15px;
 `;
 
 interface TasksBoardProps {
@@ -24,19 +30,21 @@ const TasksBoard: React.FunctionComponent<TasksBoardProps> = ({ tasks }) => {
   return (
     <Board>
       <Header>Todo List</Header>
-      {tasks.length ? (
-        tasks.map(({ title, description }, idx) => (
-          <TaskCard
-            key={idx}
-            task={{
-              title: title,
-              description: description,
-            }}
-          />
-        ))
-      ) : (
-        <Header>empty</Header>
-      )}
+      <TaskContainer>
+        {tasks.length ? (
+          tasks.map(({ title, description }, idx) => (
+            <TaskCard
+              key={idx}
+              task={{
+                title: title,
+                description: description,
+              }}
+            />
+          ))
+        ) : (
+          <Header>empty</Header>
+        )}
+      </TaskContainer>
     </Board>
   );
 };

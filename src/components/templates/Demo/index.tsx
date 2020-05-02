@@ -11,14 +11,17 @@ const View = styled.div``;
 const TopContainer = styled.div`
   display: flex;
   height: 420px;
+  padding-top: 50px;
+  padding-bottom: 20px;
   justify-content: center;
   background: rgb(238, 174, 202);
   background: radial-gradient(circle, #eeaeca 0%, #636fa4 100%);
 `;
 
-const HeaderContainer = styled.div`
+const InnerTopContainer = styled.div`
   margin-top: 60px;
   marign-bottom: 20px;
+  width: 450px;
   text-align: center;
 `;
 
@@ -28,7 +31,7 @@ const TasksContainer = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
-  height: 500px;
+  height: 450px;
 `;
 
 const DemoTemplate: React.FunctionComponent = () => {
@@ -43,10 +46,10 @@ const DemoTemplate: React.FunctionComponent = () => {
   return (
     <View>
       <TopContainer>
-        <HeaderContainer>
+        <InnerTopContainer>
           <Header>Track your tasks</Header>
           <AddTaskForm addTask={addTask} />
-        </HeaderContainer>
+        </InnerTopContainer>
       </TopContainer>
       <TasksContainer>
         <TaskBoard tasks={tasks} />

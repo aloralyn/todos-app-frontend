@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineEllipsis } from "react-icons/ai";
 import { DateTime } from "luxon";
+import { isMobile } from "react-device-detect";
 import styled from "styled-components";
 import Card from "../../atoms/Card";
 import Title from "../../atoms/Title";
@@ -11,22 +12,22 @@ import CircleCheckIcon from "../../atoms/CheckCircleIcon";
 const LeftContainer = styled.div`
   margin-left: 10px;
   padding-top: 10px;
-  padding-right: 10px;
+  padding-right: 15px;
   width: 3%;
 `;
 
 const CenterContainer = styled.div`
-  width: 65%;
+  width: 70%;
 `;
 
 const EllipsisContainer = styled.div`
-  width: 8%;
+  width: 9%;
   margin-top: 10px;
-  text-align: right;
+  text-align: leftt;
 `;
 
 const RightContainer = styled.div`
-  width: 20%;
+  width: 10%;
   text-align: right;
 `;
 
@@ -60,16 +61,26 @@ const TaskCard: React.FunctionComponent<TaskCardProps> = ({ task }) => {
         <Title>{task.title}</Title>
         <P2>{task.description}</P2>
       </CenterContainer>
-      <EllipsisContainer>
-        {showCheckCircle ? <AiOutlineEllipsis size={23} color="#fff" /> : null}
-      </EllipsisContainer>
-      <RightContainer>
-        <P1>
-          {formattedDate}
-          <br />
-          {weekday}
-        </P1>
-      </RightContainer>
+      {isMobile ? (
+        <EllipsisContainer>
+          <AiOutlineEllipsis size={23} color="#fff" />
+        </EllipsisContainer>
+      ) : (
+        <>
+          <EllipsisContainer>
+            {showCheckCircle ? (
+              <AiOutlineEllipsis size={23} color="#fff" />
+            ) : null}
+          </EllipsisContainer>
+          <RightContainer>
+            <P1>
+              {formattedDate}
+              <br />
+              {weekday}
+            </P1>
+          </RightContainer>
+        </>
+      )}
     </Card>
   );
 };

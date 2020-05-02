@@ -8,7 +8,7 @@ width: 100%;
 padding-top: 10px;
 padding-bottom: 10px;
 color: #fff;
-background-color: #282c34;
+border-bottom: 1px solid #eeaeca;
 :hover {
   background-color: #404040;
 `;
