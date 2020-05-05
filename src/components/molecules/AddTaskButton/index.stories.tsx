@@ -10,7 +10,7 @@ const Container = styled.div`
   text-align: center;
 `;
 
-storiesOf("Molecules", module)
+storiesOf("molecules", module)
   .addDecorator(withKnobs)
   .add("Button w/ Add Task Icon", () => (
     <Container>

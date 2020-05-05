@@ -8,7 +8,7 @@ const Container = styled.div`
   background-color: #fff;
 `;
 
-storiesOf("Atoms", module).add("Nav ", () => (
+storiesOf("atoms", module).add("Nav ", () => (
   <Container>
     <Nav>A nav bar</Nav>
   </Container>

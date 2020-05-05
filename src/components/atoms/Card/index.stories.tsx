@@ -8,7 +8,7 @@ const Container = styled.div`
   width: 65%;
 `;
 
-storiesOf("Atoms", module).add("Card - Default", () => (
+storiesOf("atoms", module).add("Card - Default", () => (
   <Container>
     <Card>
       Salute the{" "}

@@ -5,7 +5,7 @@ import FormContainer from "../../atoms/FormContainer";
 import FormInput from "../../molecules/FormInput";
 import FormTextArea from "../../molecules/FormTextArea";
 import AddTaskButton from "../../molecules/AddTaskButton";
-import { Task } from "../../molecules/TaskCard";
+import { Task } from "../../../store/tasks/types";
 
 const ButtonContainer = styled.div`
   margin-top: 20px;

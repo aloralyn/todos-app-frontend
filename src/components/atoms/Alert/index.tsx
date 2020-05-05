@@ -1,12 +1,13 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
+import { Colors } from "../../../styles/colors";
 
 const StyledDiv = styled.div<{ color?: string }>`
   display: flex;
   justify-content: center;
   text-align: center;
   align-items: center;
-  background-color: ${({ color }) => color ?? "#1ca1f3"};
+  background-color: ${({ color }) => color ?? Colors.ocean};
   padding: 2px 10px;
   color: black;
   height: 45px;

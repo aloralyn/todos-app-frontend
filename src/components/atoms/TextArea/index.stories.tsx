@@ -8,7 +8,7 @@ const Container = styled.div`
   text-align: center;
 `;
 
-storiesOf("Atoms", module).add("Text Area", () => (
+storiesOf("atoms", module).add("Text Area", () => (
   <Container>
     <TextArea
       id="example"

@@ -1,12 +1,17 @@
 import React from "react";
-import {configure, addParameters, addDecorator} from '@storybook/react';
+import { addParameters, addDecorator } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
-import {themes} from '@storybook/theming';
-
-import {DocsPage, DocsContainer} from '@storybook/addon-docs/blocks';
+import { themes } from "@storybook/theming";
+import { DocsPage, DocsContainer } from "@storybook/addon-docs/blocks";
+import StoryRouter from "storybook-react-router";
 import GlobalStyles from "../src/components/particles/globalStyles";
+import ProviderWrapper from "../src/components/storybook/decorators/Provider";
+import configureStore from "../src/store";
 
-const req = require.context('../src', true, /\.story\.(ts|tsx|mdx)$/);
+const store = configureStore();
+const withProvider = (story) => (
+  <ProviderWrapper store={store}>{story()}</ProviderWrapper>
+);
 
 addParameters({
   options: {
@@ -18,17 +23,13 @@ addParameters({
   },
 });
 
-
-const themeDefault = {
-	"primary": "#4E2ECD"
-}
-
-
-const GlobalWrapper = storyFn => (
-		<ThemeProvider theme={themes.dark}>	
-			<GlobalStyles/>
-			{storyFn()}
-		</ThemeProvider>
+const GlobalWrapper = (storyFn) => (
+  <ThemeProvider theme={themes.dark}>
+    <GlobalStyles />
+    {storyFn()}
+  </ThemeProvider>
 );
 
 addDecorator(GlobalWrapper);
+addDecorator(withProvider);
+addDecorator(StoryRouter());

@@ -7,7 +7,7 @@ const Container = styled.div`
   margin: 40px;
 `;
 
-storiesOf("Atoms", module).add("Alert default", () => (
+storiesOf("atoms", module).add("Alert default", () => (
   <Container>
     <Alert>Task successfully added!</Alert>
   </Container>

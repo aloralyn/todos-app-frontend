@@ -27,6 +27,6 @@ const TransitionAlertStory: React.FunctionComponent = () => {
   );
 };
 
-storiesOf("Molecules", module).add("Transition - Alert", () => (
+storiesOf("molecules", module).add("Transition - Alert", () => (
   <TransitionAlertStory />
 ));

@@ -7,7 +7,7 @@ const Container = styled.div`
   margin-top: 40px;
 `;
 
-storiesOf("Templates", module).add("Demo", () => (
+storiesOf("templates", module).add("Demo", () => (
   <Container>
     <DemoPage />
   </Container>

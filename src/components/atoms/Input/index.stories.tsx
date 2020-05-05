@@ -8,7 +8,7 @@ const Container = styled.div`
   text-align: center;
 `;
 
-storiesOf("Atoms", module).add("Input", () => (
+storiesOf("atoms", module).add("Input", () => (
   <Container>
     <Input
       id="example"
