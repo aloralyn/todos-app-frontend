@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
@@ -8,6 +9,7 @@ import FormInput from "../../molecules/FormInput";
 import Button from "../../atoms/Button";
 import H2 from "../../atoms/H2";
 import { Colors } from "../../../styles/colors";
+import SuccessModal from "../../organisms/SuccessModal";
 
 const Container = styled.div`
   justify-content: center;
@@ -67,9 +69,18 @@ const SignupForm: React.FunctionComponent = () => {
   const { errors, handleSubmit, register } = useForm<FormData>({
     validationSchema: SignupFormSchema,
   });
+  const [showModal, setShowModal] = useState(false);
   const [createUser] = useMutation<any>(createNewUser, {
-    onCompleted: () => console.log("yo?"),
+    onCompleted: () => {
+      setShowModal(true);
+    },
   });
+
+  let history = useHistory();
+
+  const handleCTAClick = () => {
+    history.push("/");
+  };
 
   const onSubmit = handleSubmit(({ name, email, password }) => {
     createUser({
@@ -131,6 +142,13 @@ const SignupForm: React.FunctionComponent = () => {
           Sign up
         </Button>
       </ButtonContainer>
+      <SuccessModal
+        cta="Back to List"
+        ctaOnClick={handleCTAClick}
+        message="Account successfully created. Welcome to Listify!"
+        show={showModal}
+        handleClose={() => setShowModal(!showModal)}
+      />
     </Container>
   );
 };

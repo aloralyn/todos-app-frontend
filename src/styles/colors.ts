@@ -3,6 +3,7 @@ export enum Colors {
   eggplantDark = "#30093a",
   eggplantMed = "#490b43",
   eggplantLight = "#614051",
+  forest = "#228B22",
   cloud = "#dfe0e6",
   lychee = "#e1567c",
   ocean = "#1ca1f3",
