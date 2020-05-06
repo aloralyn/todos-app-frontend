@@ -8,6 +8,7 @@ import Title from "../../atoms/Title";
 import P1 from "../../atoms/P1";
 import P2 from "../../atoms/P2";
 import CircleCheckIcon from "../../atoms/CheckCircleIcon";
+import { Task } from "../../../store/tasks/types";
 
 const LeftContainer = styled.div`
   margin-left: 10px;
@@ -31,11 +32,11 @@ const RightContainer = styled.div`
   text-align: right;
 `;
 
-export type Task = {
-  title: string;
-  description: string;
-  dateCreated?: Date;
-};
+// export type Task = {
+//   title: string;
+//   description: string;
+//   dateCreated?: Date;
+// };
 
 interface TaskCardProps {
   task: Task;

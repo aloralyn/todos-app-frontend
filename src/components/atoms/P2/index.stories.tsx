@@ -7,7 +7,7 @@ const Container = styled.div`
   margin: 20px;
 `;
 
-storiesOf("Atoms", module).add("P2", () => (
+storiesOf("atoms", module).add("P2", () => (
   <Container>
     <P2>
       Still I Rise

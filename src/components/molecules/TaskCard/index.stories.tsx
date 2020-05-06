@@ -7,10 +7,11 @@ const Container = styled.div`
   margin: 40px;
 `;
 
-storiesOf("Molecules", module).add("Task Card", () => (
+storiesOf("molecules", module).add("Task Card", () => (
   <Container>
     <TaskCard
       task={{
+        id: 1,
         title: "Salute the sun",
         description: "and walk the Dog",
       }}

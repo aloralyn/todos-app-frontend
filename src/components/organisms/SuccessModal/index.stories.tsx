@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import styled from "styled-components";
-import TransitionOverlay from "./";
+import SuccessModal from "./";
 import Button from "../../atoms/Button";
-import Alert from "../../atoms/Alert";
 
 const Container = styled.div`
   margin-top: 40px;
   text-align: center;
 `;
 
-const TransitionAlertStory: React.FunctionComponent = () => {
+const SuccessModalStory: React.FunctionComponent = () => {
   const [show, setShow] = useState(false);
 
   return (
@@ -18,15 +17,17 @@ const TransitionAlertStory: React.FunctionComponent = () => {
       <Button onClick={() => setShow(!show)} theme="rectangle">
         Toggle
       </Button>
-      <TransitionOverlay show={show}>
-        <Container>
-          <Alert>Success!</Alert>
-        </Container>
-      </TransitionOverlay>
+      <SuccessModal
+        cta="Back to List"
+        ctaOnClick={() => setShow(false)}
+        handleClose={() => setShow(false)}
+        message="Account successfully created. Welcome to Listify!"
+        show={show}
+      />
     </Container>
   );
 };
 
-storiesOf("molecules", module).add("Transition - Alert", () => (
-  <TransitionAlertStory />
+storiesOf("organisms", module).add("Success Modal", () => (
+  <SuccessModalStory />
 ));

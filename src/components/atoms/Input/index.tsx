@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FormContextValues } from "react-hook-form";
 
 const StyledInput = styled.input`
-  border: 4px solid;
+  border: 3px solid;
   border-image-source: linear-gradient(to left, #eeaeca 0%, #636fa4 100%);
   border-image-slice: 1;
   border-radius: 0.375rem;
@@ -45,6 +45,7 @@ const Input: React.FunctionComponent<InputProps> = ({
     placeholder={placeholder}
     maxLength={maxLength}
     ref={register && register({ maxLength: 80, required })}
+    autoComplete="off"
     {...rest}
   />
 );

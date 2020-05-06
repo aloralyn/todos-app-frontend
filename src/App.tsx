@@ -6,7 +6,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 
 import { Route, Switch } from "react-router-dom";
 import Home from "./components/pages/Home";
-import Signup from "./components/pages/Signup/Signup";
+import Signup from "./components/pages/Signup";
 import "./App.css";
 
 const App: React.FunctionComponent = () => {

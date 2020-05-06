@@ -10,7 +10,7 @@ const Container = styled.div`
   text-align: center;
 `;
 
-storiesOf("Atoms", module)
+storiesOf("atoms", module)
   .addDecorator(withKnobs)
   .add("Button - Square Default", () => (
     <Container>

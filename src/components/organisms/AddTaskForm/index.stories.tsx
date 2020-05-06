@@ -9,7 +9,7 @@ const Container = styled.div`
   margin: 20px;
 `;
 
-storiesOf("Organisms", module)
+storiesOf("organisms", module)
   .addDecorator(withKnobs)
   .add("Add Task Form", () => (
     <Container>

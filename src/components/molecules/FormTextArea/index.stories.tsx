@@ -8,7 +8,7 @@ const Container = styled.div`
   margin: 80px;
 `;
 
-storiesOf("Molecules", module)
+storiesOf("molecules", module)
   .addDecorator(withKnobs)
   .add("Form Text Area", () => (
     <Container>

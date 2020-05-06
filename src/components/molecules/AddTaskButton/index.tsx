@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../atoms/Button";
 import { MdPlaylistAdd } from "react-icons/md";
+import Button from "../../atoms/Button";
 
 export interface AddTaskButtonProps {
   onClick: (e?: React.BaseSyntheticEvent<object, any, any> | undefined) => void;

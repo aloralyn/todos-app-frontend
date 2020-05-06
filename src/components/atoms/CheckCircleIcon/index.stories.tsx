@@ -7,7 +7,7 @@ const Container = styled.div`
   margin: 20px;
 `;
 
-storiesOf("Atoms", module)
+storiesOf("atoms", module)
   .add("CheckCircleIcon - Unchecked", () => (
     <Container>
       <CheckCircleIcon isChecked={false} size={40} />

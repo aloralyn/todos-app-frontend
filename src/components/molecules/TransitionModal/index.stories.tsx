@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import styled from "styled-components";
-import TransitionOverlay from "./";
+import TransitionModal from "./";
 import Button from "../../atoms/Button";
-import Alert from "../../atoms/Alert";
 
 const Container = styled.div`
   margin-top: 40px;
@@ -18,15 +17,16 @@ const TransitionAlertStory: React.FunctionComponent = () => {
       <Button onClick={() => setShow(!show)} theme="rectangle">
         Toggle
       </Button>
-      <TransitionOverlay show={show}>
-        <Container>
-          <Alert>Success!</Alert>
-        </Container>
-      </TransitionOverlay>
+      <TransitionModal
+        title="Success"
+        message="Account successfully created. Welcome to Listify!"
+        show={show}
+        handleClose={() => setShow(!show)}
+      />
     </Container>
   );
 };
 
-storiesOf("molecules", module).add("Transition - Alert", () => (
+storiesOf("molecules", module).add("Transition Modal", () => (
   <TransitionAlertStory />
 ));

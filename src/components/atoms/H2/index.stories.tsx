@@ -1,14 +1,14 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import styled from "styled-components";
-import Title from "./";
+import H2 from ".";
 
 const Container = styled.div`
-  margin: 20px;
+  margin: 30px;
 `;
 
-storiesOf("atoms", module).add("Title", () => (
+storiesOf("atoms", module).add("H2", () => (
   <Container>
-    <Title>Salute the Sun</Title>
+    <H2>Sign up with your email address</H2>
   </Container>
 ));
