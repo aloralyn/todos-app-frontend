@@ -13,13 +13,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-};
-
-export type Todo = {
-   __typename?: 'Todo';
-  _id?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
+  /** The `DateTime` scalar type represents a DateTime. The DateTime is serialized as an RFC 3339 quoted string */
+  DateTime: any;
 };
 
 export type RootMutation = {
@@ -28,8 +23,10 @@ export type RootMutation = {
   createTodo?: Maybe<Todo>;
   /** Create a new user */
   createUser?: Maybe<User>;
-  /** New JWT token */
-  token?: Maybe<Scalars['String']>;
+  /** Authenticates a user */
+  loginUser?: Maybe<AuthenticatedUser>;
+  /** Update a todo */
+  updateTodo?: Maybe<Todo>;
 };
 
 
@@ -46,16 +43,17 @@ export type RootMutationCreateUserArgs = {
 };
 
 
-export type RootMutationTokenArgs = {
-  name: Scalars['String'];
+export type RootMutationLoginUserArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
 };
 
-export type RootQuery = {
-   __typename?: 'RootQuery';
-  /** Get all todos */
-  getTodos?: Maybe<Array<Maybe<Todo>>>;
+
+export type RootMutationUpdateTodoArgs = {
+  _id: Scalars['String'];
+  title: Scalars['String'];
+  description: Scalars['String'];
+  dateCompleted?: Maybe<Scalars['DateTime']>;
 };
 
 export type User = {
@@ -65,6 +63,46 @@ export type User = {
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
 };
+
+export type RootQuery = {
+   __typename?: 'RootQuery';
+  /** Get all todos */
+  getTodos?: Maybe<Array<Maybe<Todo>>>;
+};
+
+export type Todo = {
+   __typename?: 'Todo';
+  _id?: Maybe<Scalars['String']>;
+  /** When the todo was completed */
+  dateCompleted?: Maybe<Scalars['DateTime']>;
+  /** When the todo was created */
+  dateCreated?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+export type AuthenticatedUser = {
+   __typename?: 'AuthenticatedUser';
+  _id?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
+};
+
+export type LoginUserMutationVariables = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type LoginUserMutation = (
+  { __typename?: 'RootMutation' }
+  & { loginUser?: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & Pick<AuthenticatedUser, '_id' | 'name' | 'email' | 'token'>
+  )> }
+);
 
 export type CreateUserMutationVariables = {
   name: Scalars['String'];
@@ -82,6 +120,61 @@ export type CreateUserMutation = (
 );
 
 
+export const LoginUserDocument = gql`
+    mutation LoginUser($email: String!, $password: String!) {
+  loginUser(email: $email, password: $password) {
+    _id
+    name
+    email
+    token
+  }
+}
+    `;
+export type LoginUserMutationFn = ApolloReactCommon.MutationFunction<LoginUserMutation, LoginUserMutationVariables>;
+export type LoginUserComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<LoginUserMutation, LoginUserMutationVariables>, 'mutation'>;
+
+    export const LoginUserComponent = (props: LoginUserComponentProps) => (
+      <ApolloReactComponents.Mutation<LoginUserMutation, LoginUserMutationVariables> mutation={LoginUserDocument} {...props} />
+    );
+    
+export type LoginUserProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+      [key in TDataName]: ApolloReactCommon.MutationFunction<LoginUserMutation, LoginUserMutationVariables>
+    } & TChildProps;
+export function withLoginUser<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  LoginUserMutation,
+  LoginUserMutationVariables,
+  LoginUserProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withMutation<TProps, LoginUserMutation, LoginUserMutationVariables, LoginUserProps<TChildProps, TDataName>>(LoginUserDocument, {
+      alias: 'loginUser',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useLoginUserMutation__
+ *
+ * To run a mutation, you first call `useLoginUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [loginUserMutation, { data, loading, error }] = useLoginUserMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useLoginUserMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LoginUserMutation, LoginUserMutationVariables>) {
+        return ApolloReactHooks.useMutation<LoginUserMutation, LoginUserMutationVariables>(LoginUserDocument, baseOptions);
+      }
+export type LoginUserMutationHookResult = ReturnType<typeof useLoginUserMutation>;
+export type LoginUserMutationResult = ApolloReactCommon.MutationResult<LoginUserMutation>;
+export type LoginUserMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginUserMutation, LoginUserMutationVariables>;
 export const CreateUserDocument = gql`
     mutation CreateUser($name: String!, $email: String!, $password: String!) {
   createUser(name: $name, email: $email, password: $password) {

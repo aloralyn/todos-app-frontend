@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Alert from "../../atoms/Alert";
-//import { Task } from "../../molecules/TaskCard";
 import TransitionOverlay from "../../molecules/TransitionOverlay";
 import AddTaskForm from "../../organisms/AddTaskForm";
-import { ADD_TASK, Task } from "../../../store/tasks/types";
 import TaskBoard from "../../organisms/TaskBoard";
+import { ADD_TASK, Task } from "../../../store/tasks/types";
 
 const View = styled.div``;
 
@@ -36,8 +35,6 @@ const TasksContainer = styled.div`
   height: 450px;
 `;
 
-const add = (task: Task) => ({ type: ADD_TASK, payload: task });
-
 const DemoTemplate: React.FunctionComponent = () => {
   // const taskList = useSelector<TaskListState>(
   //   (state): TaskListState["tasks"] => {
@@ -51,11 +48,12 @@ const DemoTemplate: React.FunctionComponent = () => {
   const [showOverlay, setShowOverlay] = useState(false);
 
   const addTask = (task: Task) => {
-    dispatch(add(task));
+    dispatch({ type: ADD_TASK, payload: task });
     // setTask([...tasks, task]);
     setShowOverlay(true);
     setTimeout(() => setShowOverlay(false), 2000);
   };
+
   return (
     <View>
       <TopContainer>

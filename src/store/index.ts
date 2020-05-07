@@ -1,11 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-
-import { tasks } from "./tasks/reducers";
+import { userReducer } from "./user/reducers";
+import { taskReducer } from "./tasks/reducers";
 
 const rootReducer = combineReducers({
-  tasks,
+  user: userReducer,
+  tasks: taskReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

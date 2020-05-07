@@ -29,9 +29,9 @@ const StyledButton = styled.button<{
   ${({ theme }) =>
       theme === "pill"
         ? `
-    width: 200px;
+    width: 150px;
     height: 40px;
-    border-radius: 5rem;
+    border-radius: 3rem;
     border: none;`
         : `
     border-radius: 0.7rem;
@@ -81,7 +81,7 @@ const StyledButton = styled.button<{
   will-change: box-shadow;
   outline: 0 !important;
 `;
-// user-select: none;
+
 export interface ButtonProps {
   theme?: Theme;
   color?: string;
