@@ -4,7 +4,7 @@ const initialState: TaskListState = {
   list: [],
 };
 
-export function tasks(
+export function taskReducer(
   state = initialState,
   action: TaskActionTypes
 ): TaskListState {

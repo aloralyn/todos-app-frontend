@@ -5,11 +5,12 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import styled from "styled-components";
+import SuccessModal from "../../organisms/SuccessModal";
 import FormInput from "../../molecules/FormInput";
 import Button from "../../atoms/Button";
 import H2 from "../../atoms/H2";
+import { CreateUserMutationVariables } from "../../../generated/graphql";
 import { Colors } from "../../../styles/colors";
-import SuccessModal from "../../organisms/SuccessModal";
 
 const Container = styled.div`
   justify-content: center;
@@ -34,7 +35,7 @@ const ButtonContainer = styled.div`
   text-align: center;
 `;
 
-type FormData = {
+type SignupFormData = {
   name: string;
   email: string;
   confirmEmail: string;
@@ -66,11 +67,11 @@ const createNewUser = gql`
 `;
 
 const SignupForm: React.FunctionComponent = () => {
-  const { errors, handleSubmit, register } = useForm<FormData>({
+  const { errors, handleSubmit, register } = useForm<SignupFormData>({
     validationSchema: SignupFormSchema,
   });
   const [showModal, setShowModal] = useState(false);
-  const [createUser] = useMutation<any>(createNewUser, {
+  const [createUser] = useMutation<CreateUserMutationVariables>(createNewUser, {
     onCompleted: () => {
       setShowModal(true);
     },
@@ -79,7 +80,7 @@ const SignupForm: React.FunctionComponent = () => {
   let history = useHistory();
 
   const handleCTAClick = () => {
-    history.push("/");
+    history.push("/login");
   };
 
   const onSubmit = handleSubmit(({ name, email, password }) => {

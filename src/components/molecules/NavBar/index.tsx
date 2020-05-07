@@ -4,7 +4,7 @@ import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
 import { NavLink as RouterLink } from "react-router-dom";
 import styled from "styled-components";
 
-const useStyles = makeStyles((them: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
@@ -37,7 +37,9 @@ const NavBar = () => {
           <Button color="inherit" component={RouterLink} to="/signup">
             Sign up
           </Button>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" component={RouterLink} to="/login">
+            Login
+          </Button>
         </Toolbar>
       </StyledAppBar>
     </div>
