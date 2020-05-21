@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
+//import { useDispatch } from "react-redux";
 import { ApolloClient } from "apollo-client";
 import { ApolloProvider } from "react-apollo";
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { Route, Switch } from "react-router-dom";
-import { FETCH_USER } from "./store/user/types";
-import Home from "./components/pages/Home";
+//import { FETCH_USER } from "./store/user/types";
+import Demo from "./components/pages/Demo";
 import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
 import "./App.css";
 
 const App: React.FunctionComponent = () => {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const httpLink = createHttpLink({
     uri: "https://qwertypies-api.onrender.com/api/signup",
@@ -42,7 +42,7 @@ const App: React.FunctionComponent = () => {
   return (
     <ApolloProvider client={client}>
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Demo} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
       </Switch>

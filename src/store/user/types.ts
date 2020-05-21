@@ -2,13 +2,14 @@ export interface User {
   id?: string;
   name?: string;
   email?: string;
+  isLoggedIn: boolean;
 }
 
-export const FETCH_USER = "FETCH_USER";
+export const SET_USER = "SET_USER";
 
-export interface FetchUserAction {
-  type: typeof FETCH_USER;
+export interface SetUserAction {
+  type: typeof SET_USER;
   payload: User;
 }
 
-export type UserActionTypes = FetchUserAction;
+export type UserActionTypes = SetUserAction;

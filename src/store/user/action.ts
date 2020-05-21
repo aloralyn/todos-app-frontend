@@ -1,8 +1,8 @@
-import { User, FETCH_USER, UserActionTypes } from "./types";
+import { User, SET_USER, UserActionTypes } from "./types";
 
-export function fetchUser(user: User): UserActionTypes {
+export function setUser(user: User): UserActionTypes {
   return {
-    type: FETCH_USER,
+    type: SET_USER,
     payload: user,
   };
 }

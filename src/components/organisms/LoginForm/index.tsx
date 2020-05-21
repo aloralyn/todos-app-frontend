@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import FormInput from "../../molecules/FormInput";
 import Button from "../../atoms/Button";
-import { FETCH_USER } from "../../../store/user/types";
+import { SET_USER } from "../../../store/user/types";
 import { Colors } from "../../../styles/colors";
 import {
   AuthenticatedUser,
@@ -50,8 +50,15 @@ const LoginFormValidationSchema = yup.object().shape({
 const LoginForm: React.FunctionComponent = () => {
   let history = useHistory();
   const dispatch = useDispatch();
+  const setUser = (user: AuthenticatedUser) =>
+    dispatch({
+      type: SET_USER,
+      payload: {
+        user,
+        isLoggedIn: true,
+      },
+    });
   const setToken = (user: AuthenticatedUser) => {
-    dispatch({ type: FETCH_USER, payload: user });
     const auth = JSON.stringify({
       id: user._id,
       idToken: user.token,
@@ -65,6 +72,7 @@ const LoginForm: React.FunctionComponent = () => {
   const [authenticateUser] = useMutation<LoginUserMutation>(loginUser, {
     onCompleted: (data) => {
       if (data.loginUser) {
+        setUser(data.loginUser);
         setToken(data.loginUser);
         history.push("/");
       }

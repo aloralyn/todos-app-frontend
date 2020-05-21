@@ -1,15 +1,27 @@
 import React from "react";
-import { RiEmotionHappyLine } from "react-icons/ri";
+import { RiEmotionHappyLine, RiEmotionNormalLine } from "react-icons/ri";
 import styled from "styled-components";
 import Button from "../../atoms/Button";
 import TransitionModal from "../../molecules/TransitionModal";
 import { Colors } from "../../../styles/colors";
 
+export type Alert = "Success" | "Error";
+
 const HappyIcon = styled(RiEmotionHappyLine)`
   transform: rotate(180deg);
 `;
 
-interface SuccessModalProps {
+const getIcon = (type: Alert) => {
+  switch (type) {
+    case "Success":
+      return <HappyIcon size={54} color={Colors.lychee} />;
+    case "Error":
+      return <RiEmotionNormalLine size={54} color={Colors.lychee} />;
+  }
+};
+
+interface AlertModalProps {
+  type: Alert;
   cta: string;
   ctaOnClick: () => void;
   handleClose: () => void;
@@ -17,7 +29,8 @@ interface SuccessModalProps {
   show: boolean;
 }
 
-const SuccessModal: React.FunctionComponent<SuccessModalProps> = ({
+const AlertModal: React.FunctionComponent<AlertModalProps> = ({
+  type,
   cta,
   ctaOnClick,
   handleClose,
@@ -26,10 +39,10 @@ const SuccessModal: React.FunctionComponent<SuccessModalProps> = ({
 }) => (
   <TransitionModal
     show={show}
-    title="Success"
+    title={type}
     message={message}
     handleClose={handleClose}
-    icon={<HappyIcon size={54} color={Colors.lychee} />}
+    icon={getIcon(type)}
     button={
       <Button theme="pill" activeColor={Colors.forest} onClick={ctaOnClick}>
         {cta}
@@ -38,4 +51,4 @@ const SuccessModal: React.FunctionComponent<SuccessModalProps> = ({
   />
 );
 
-export default SuccessModal;
+export default AlertModal;

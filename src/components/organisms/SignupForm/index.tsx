@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import styled from "styled-components";
-import SuccessModal from "../../organisms/SuccessModal";
+import AlertModal from "../AlertModal";
 import FormInput from "../../molecules/FormInput";
 import Button from "../../atoms/Button";
 import H2 from "../../atoms/H2";
@@ -70,10 +70,15 @@ const SignupForm: React.FunctionComponent = () => {
   const { errors, handleSubmit, register } = useForm<SignupFormData>({
     validationSchema: SignupFormSchema,
   });
-  const [showModal, setShowModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
   const [createUser] = useMutation<CreateUserMutationVariables>(createNewUser, {
+    onError: (e) => {
+      console.log(e);
+      setShowErrorModal(true);
+    },
     onCompleted: () => {
-      setShowModal(true);
+      setShowSuccessModal(true);
     },
   });
 
@@ -143,12 +148,21 @@ const SignupForm: React.FunctionComponent = () => {
           Sign up
         </Button>
       </ButtonContainer>
-      <SuccessModal
+      <AlertModal
+        type="Success"
         cta="Back to List"
         ctaOnClick={handleCTAClick}
         message="Account successfully created. Welcome to Listify!"
-        show={showModal}
-        handleClose={() => setShowModal(!showModal)}
+        show={showSuccessModal}
+        handleClose={() => setShowSuccessModal(!showSuccessModal)}
+      />
+      <AlertModal
+        type="Error"
+        cta="Try again"
+        ctaOnClick={handleCTAClick}
+        message="Uh oh, something went wrong. Are you sure you don't already have an account with us?"
+        show={showErrorModal}
+        handleClose={() => setShowErrorModal(!showErrorModal)}
       />
     </Container>
   );
