@@ -24,7 +24,7 @@ const StyledAppBar = styled(AppBar)`
   );
 `;
 
-const NavBar = () => {
+const DemoNavBar = () => {
   const classes = useStyles();
 
   return (
@@ -32,7 +32,7 @@ const NavBar = () => {
       <StyledAppBar position="fixed" color="transparent">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            bossB!tch
+            L!stify - a toy project inspired by a fave music app
           </Typography>
           <Button color="inherit" component={RouterLink} to="/signup">
             Sign up
@@ -46,4 +46,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default DemoNavBar;
