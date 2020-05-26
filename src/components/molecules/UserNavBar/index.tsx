@@ -32,7 +32,7 @@ const UserNavBar = () => {
       <StyledAppBar position="fixed" color="transparent">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            bossB!tch
+            L!stify
           </Typography>
           <Button color="inherit" component={RouterLink} to="/login">
             Log out

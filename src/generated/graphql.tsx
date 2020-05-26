@@ -17,6 +17,39 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type Todo = {
+   __typename?: 'Todo';
+  _id?: Maybe<Scalars['String']>;
+  /** When the todo was completed */
+  dateCompleted?: Maybe<Scalars['DateTime']>;
+  /** When the todo was created */
+  dateCreated?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type AuthenticatedUser = {
+   __typename?: 'AuthenticatedUser';
+  _id?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
+};
+
+export type RootQuery = {
+   __typename?: 'RootQuery';
+  /** Get all todos */
+  getTodos?: Maybe<Array<Maybe<Todo>>>;
+  /** Get user details */
+  getUser?: Maybe<AuthenticatedUser>;
+};
+
+
+export type RootQueryGetUserArgs = {
+  _id: Scalars['String'];
+};
+
+
 export type RootMutation = {
    __typename?: 'RootMutation';
   /** Create a todo */
@@ -31,8 +64,8 @@ export type RootMutation = {
 
 
 export type RootMutationCreateTodoArgs = {
-  title: Scalars['String'];
   description: Scalars['String'];
+  title: Scalars['String'];
 };
 
 
@@ -50,10 +83,10 @@ export type RootMutationLoginUserArgs = {
 
 
 export type RootMutationUpdateTodoArgs = {
-  _id: Scalars['String'];
   title: Scalars['String'];
   description: Scalars['String'];
   dateCompleted?: Maybe<Scalars['DateTime']>;
+  _id: Scalars['String'];
 };
 
 export type User = {
@@ -62,32 +95,6 @@ export type User = {
   email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-};
-
-export type RootQuery = {
-   __typename?: 'RootQuery';
-  /** Get all todos */
-  getTodos?: Maybe<Array<Maybe<Todo>>>;
-};
-
-export type Todo = {
-   __typename?: 'Todo';
-  _id?: Maybe<Scalars['String']>;
-  /** When the todo was completed */
-  dateCompleted?: Maybe<Scalars['DateTime']>;
-  /** When the todo was created */
-  dateCreated?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-};
-
-
-export type AuthenticatedUser = {
-   __typename?: 'AuthenticatedUser';
-  _id?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  token?: Maybe<Scalars['String']>;
 };
 
 export type LoginUserMutationVariables = {

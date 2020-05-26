@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Alert from "../../atoms/Alert";
 import TransitionOverlay from "../../molecules/TransitionOverlay";
 import AddTaskForm from "../../organisms/AddTaskForm";
 import TaskBoard from "../../organisms/TaskBoard";
-import { ADD_TASK, Task } from "../../../store/tasks/types";
+import { AppContext } from "../../../store/context";
+import { Task, Types } from "../../../store/reducers";
 
 const View = styled.div``;
 
@@ -36,22 +36,14 @@ const TasksContainer = styled.div`
 `;
 
 const DemoTemplate: React.FunctionComponent = () => {
-  // const taskList = useSelector<TaskListState>(
-  //   (state): TaskListState["tasks"] => {
-  //     console.log("the state..\n", state.tasks);
-  //     return state.tasks;
-  //   }
-  // );
-  const dispatch = useDispatch();
-
-  //const [tasks, setTask] = useState<Task[]>([]);
-  const [showOverlay, setShowOverlay] = useState(false);
+  const { dispatch } = useContext(AppContext);
+  const [showOverlay] = useState(false);
 
   const addTask = (task: Task) => {
-    dispatch({ type: ADD_TASK, payload: task });
-    // setTask([...tasks, task]);
-    setShowOverlay(true);
-    setTimeout(() => setShowOverlay(false), 2000);
+    dispatch({
+      type: Types.AddTask,
+      payload: task,
+    });
   };
 
   return (

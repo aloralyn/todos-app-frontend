@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { AppContext } from "../../../store/context";
 import TaskCard from "../../molecules/TaskCard";
-import { TaskListState } from "../../../store/tasks/types";
-import { AppState } from "../../../store";
 
 const Board = styled.div`
   width: 90%;
@@ -26,18 +24,14 @@ const Header = styled.div`
 `;
 
 const TasksBoard: React.FunctionComponent = () => {
-  const tasks = useSelector(
-    (state: AppState): TaskListState => {
-      return state.tasks;
-    }
-  );
+  const { state } = useContext(AppContext);
 
   return (
     <Board>
       <Header>Todo List</Header>
       <TaskContainer>
-        {tasks.list.length ? (
-          tasks.list.map(({ title, description }, idx) => (
+        {state.tasks?.length ? (
+          state.tasks.map(({ title, description }, idx) => (
             <TaskCard
               key={idx}
               task={{

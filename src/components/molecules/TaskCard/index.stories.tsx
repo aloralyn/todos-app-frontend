@@ -11,7 +11,7 @@ storiesOf("molecules", module).add("Task Card", () => (
   <Container>
     <TaskCard
       task={{
-        id: 1,
+        id: "1",
         title: "Salute the sun",
         description: "and walk the Dog",
       }}

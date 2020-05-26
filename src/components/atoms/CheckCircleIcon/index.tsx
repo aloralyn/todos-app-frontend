@@ -7,17 +7,19 @@ import {
 interface CheckCircleIconProps {
   isChecked: boolean;
   size?: number;
+  onClick?: () => void;
 }
 
 const CheckCircleIcon: React.FunctionComponent<CheckCircleIconProps> = ({
   isChecked,
   size,
+  onClick,
 }) => (
   <>
     {isChecked ? (
-      <RiCheckboxCircleLine color="fff" size={size} />
+      <RiCheckboxCircleLine color="fff" size={size} onClick={onClick} />
     ) : (
-      <RiCheckboxBlankCircleLine color="#fff" size={size} />
+      <RiCheckboxBlankCircleLine color="#fff" size={size} onClick={onClick} />
     )}
   </>
 );

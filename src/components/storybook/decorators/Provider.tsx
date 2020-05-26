@@ -4,6 +4,7 @@ import { ApolloClient } from "apollo-client";
 import { ApolloProvider } from "react-apollo";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { GRAPHQL_ENDPOINT } from "../../../constants/env";
 
 import { Store } from "redux";
 
@@ -17,7 +18,7 @@ const ProviderWrapper: React.FunctionComponent<ProviderWrapperProps> = ({
   store,
 }) => {
   const link = createHttpLink({
-    uri: "https://qwertypies-api.onrender.com/api",
+    uri: GRAPHQL_ENDPOINT,
   });
 
   const client = new ApolloClient({

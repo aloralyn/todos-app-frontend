@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloClient } from "apollo-client";
+import { createHttpLink } from "apollo-link-http";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -9,6 +12,7 @@ import AlertModal from "../AlertModal";
 import FormInput from "../../molecules/FormInput";
 import Button from "../../atoms/Button";
 import H2 from "../../atoms/H2";
+import { AUTH_ENDPOINT } from "../../../constants/env";
 import { CreateUserMutationVariables } from "../../../generated/graphql";
 import { Colors } from "../../../styles/colors";
 
@@ -66,6 +70,15 @@ const createNewUser = gql`
   }
 `;
 
+const httpLink = createHttpLink({
+  uri: AUTH_ENDPOINT,
+});
+
+const authClient = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: httpLink,
+});
+
 const SignupForm: React.FunctionComponent = () => {
   const { errors, handleSubmit, register } = useForm<SignupFormData>({
     validationSchema: SignupFormSchema,
@@ -73,6 +86,7 @@ const SignupForm: React.FunctionComponent = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [createUser] = useMutation<CreateUserMutationVariables>(createNewUser, {
+    client: authClient,
     onError: (e) => {
       console.log(e);
       setShowErrorModal(true);

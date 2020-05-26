@@ -1,5 +1,5 @@
 overwrite: true
-schema: "https://qwertypies-api.onrender.com/api/signup"
+schema: "https://qwertypies-api.onrender.com/api/graphql"
 documents: "./src/components/**/*.tsx"
 generates:
   src/generated/graphql.tsx:

@@ -1,51 +1,47 @@
 import React from "react";
-//import { useDispatch } from "react-redux";
 import { ApolloClient } from "apollo-client";
 import { ApolloProvider } from "react-apollo";
-import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
+import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { Route, Switch } from "react-router-dom";
-//import { FETCH_USER } from "./store/user/types";
 import Demo from "./components/pages/Demo";
 import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
+import { AppProvider } from "./store/context";
+import { GRAPHQL_ENDPOINT } from "./constants/env";
 import "./App.css";
 
 const App: React.FunctionComponent = () => {
-  //const dispatch = useDispatch();
-
-  const httpLink = createHttpLink({
-    uri: "https://qwertypies-api.onrender.com/api/signup",
-  });
-
   const authLink = setContext((_, { headers }) => {
     const auth = localStorage.getItem("auth");
     const token = auth && JSON.parse(auth).idToken;
     return {
       headers: {
         ...headers,
-        authorization: token ? `token}` : "",
+        authorization: token ? token : "",
       },
     };
   });
 
-  const client = new ApolloClient({
-    cache: new InMemoryCache(),
-    link: httpLink.concat(authLink),
+  const httpLink = new HttpLink({
+    uri: GRAPHQL_ENDPOINT,
   });
 
-  // useEffect(() => {
-  //   dispatch({ type: FETCH_USER, payload: user });
-  // }, []);
+  const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    link: authLink.concat(httpLink),
+  });
 
   return (
     <ApolloProvider client={client}>
-      <Switch>
-        <Route exact path="/" component={Demo} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-      </Switch>
+      <AppProvider>
+        <Switch>
+          <Route exact path="/" component={Demo} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+        </Switch>
+      </AppProvider>
     </ApolloProvider>
   );
 };

@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
-import { useDispatch } from "react-redux";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloClient } from "apollo-client";
+import { createHttpLink } from "apollo-link-http";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import FormInput from "../../molecules/FormInput";
 import Button from "../../atoms/Button";
-import { SET_USER } from "../../../store/user/types";
 import { Colors } from "../../../styles/colors";
-import {
-  AuthenticatedUser,
-  LoginUserMutation,
-} from "../../../generated/graphql";
+import { AUTH_ENDPOINT } from "../../../constants/env";
+import { AppContext } from "../../../store/context";
+import { Types } from "../../../store/reducers";
+import { User } from "../../../generated/graphql";
 
 const Container = styled.div`
   width: 400px;
@@ -47,29 +48,46 @@ const LoginFormValidationSchema = yup.object().shape({
   password: yup.string().required("Enter your password."),
 });
 
+const httpLink = createHttpLink({
+  uri: AUTH_ENDPOINT,
+});
+
+const authClient = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: httpLink,
+});
+
 const LoginForm: React.FunctionComponent = () => {
   let history = useHistory();
-  const dispatch = useDispatch();
-  const setUser = (user: AuthenticatedUser) =>
+
+  const { dispatch } = useContext(AppContext);
+
+  const setUser = (user: User) =>
     dispatch({
-      type: SET_USER,
+      type: Types.SetUser,
       payload: {
-        user,
         isLoggedIn: true,
+        user: user,
       },
     });
-  const setToken = (user: AuthenticatedUser) => {
+
+  const setToken = (user: any) => {
     const auth = JSON.stringify({
       id: user._id,
       idToken: user.token,
     });
     localStorage.setItem("auth", auth);
   };
+
   const { errors, handleSubmit, register } = useForm<LoginFormData>({
     validationSchema: LoginFormValidationSchema,
   });
 
-  const [authenticateUser] = useMutation<LoginUserMutation>(loginUser, {
+  const [authenticateUser] = useMutation(loginUser, {
+    client: authClient,
+    onError: (error) => {
+      console.log(error);
+    },
     onCompleted: (data) => {
       if (data.loginUser) {
         setUser(data.loginUser);
